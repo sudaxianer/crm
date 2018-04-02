@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CRM增删改客户信息</title>
+	<link charset="utf-8" rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+<body>
+	<div class="box2">
+		<div>
+			<span>姓名：</span>
+			<input type="text" id="userName">
+		</div>
+		<div>
+			<span>年龄：</span>
+			<input type="text" id="userAge">
+		</div>
+		<div>
+			<span>电话：</span>
+			<input type="text" id="userTel">
+		</div>
+		<div>
+			<span>地址：</span>
+			<input type="text" id="userAddress">
+		</div>
+		<div class="submit" id="submit">提交</div>
+	</div>
+	<script charset="utf-8" type="text/javascript" src="../javascript/ajax.js"></script>
+	<script charset="utf-8" type="text/javascript">
+		//获取url地址栏中问号后面的参数值
+		String.prototype.queryURLparameter = function () {
+			var obj = {},
+				reg = /([^?=&#]+)=([^?=&#]+)/g;
+			this.replace(reg, function () {
+				var key = arguments[1],
+					value = arguments[2];
+				obj[key] = value;
+			});
+			return obj;
+		}
+		var userName = document.getElementById('userName'),
+			userAge = document.getElementById('userAge'),
+			userTel = document.getElementById('userTel'),
+			userAddress = document.getElementById('userAddress'),
+			submit = document.getElementById('submit');
+
+		var urlObj = window.location.href.queryURLparameter(),
+			customId = urlObj["id"],
+			//是否为修改操作，true代表修改，false代表增加
+			isFlag = typeof customId === "undefined" ? false : true;
+
+		//如果是修改的话，需要把对应客户的信息获取到，并增加到对应的文本框中
+		if (isFlag) {
+			ajax({
+				url: "/getInfo?id=" + customId,
+				success: function (jsonData) {
+					if (jsonData && jsonData.code == 0) {
+						var data = jsonData["data"];
+						userName.value = data["name"];
+						userAge.value = data["age"];
+						userTel.value = data["tel"];
+						userAddress.value = data["address"];
+					}
+				}
+			});
+		}
+		// 为按钮绑定点击事件
+		submit.onclick = function() {
+			var obj = {
+				name: userName.value,
+				age: userAge.value,
+				tel: userTel.value,
+				address: userAddress.value
+			};
+			// update
+			if (isFlag) {
+				obj.id = customId;
+				ajax({
+					url: "/updateInfo",
+					type: "post",
+					data: JSON.stringify(obj),
+					success: function (jsonData) {
+						if (jsonData && jsonData.code == 0) {
+							window.location.href = "../main.html";
+							return;
+						}
+						alert(jsonData.msg);
+					}
+				})
+				return;
+			}
+			// add
+			ajax({
+				url: "/addInfo",
+				type: "post",
+				data: JSON.stringify(obj), 
+				success: function (jsonData) {
+					if (jsonData && jsonData.code == 0) {
+						window.location.href = "../main.html";
+						return;
+					}
+					alert(jsonData.msg);
+				}
+			})
+		}
+	</script>
+</body>
+</html>

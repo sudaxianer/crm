@@ -1,0 +1,111 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+html,body{
+	width: 100%;
+	color: #000;
+	font-size: 14px;
+	font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, sans-serif;
+	overflow-x: hidden;
+}
+ul,li{
+	list-style: none;
+}
+a, a:hover, a:active, a:visited, a:target{
+	color: #000;
+	text-decoration: none;
+}
+input{
+	display: inline-block;
+	outline: none;
+}
+.w50{
+	width: 50px;
+}
+.w150{
+	width: 150px;
+}
+.w200{
+	width: 200px;
+}
+/*main样式*/
+.box{
+	margin: 20px auto;
+	width: 800px;
+	padding: 20px;
+	border: 2px solid #2DC3F2;
+}
+.link{
+	display: block;
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+.link:hover{
+	color: #2DC3F2;
+	text-decoration: underline;
+}
+.head, .list li{
+	height: 35px;
+	line-height: 35px;
+}
+.head{
+	background: #2DC3F2;
+}
+.head span, .list li span{
+	float: left;
+	text-align: center;
+	font-size: 14px;
+	/*禁止换行*/
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.head span{
+	color: #fff;
+	font-weight: 700;
+}
+.list li:nth-child(even){
+	background: #eee;
+}
+.list li:hover{
+	background: #ffeeaa;
+}
+.control a{
+	display: inline-block;
+	margin: 0 5px;
+}
+
+/*add样式*/
+.box2{
+	margin: 20px auto;
+	padding: 20px;
+	border: 2px solid #2DC3F2;
+	width: 500px;
+}
+.box2 div{
+	margin: 10px auto;
+	height: 32px;
+	line-height: 32px;
+}
+.box2 div span{
+	display: inline-block;
+	width: 50px;
+}
+.box2 div input{
+	padding: 0 10px;
+	width: 380px;
+	height: 30px;
+	border: 1px solid #ddd;
+}
+#userName, #userAge{
+	width: 190px;
+}
+.box2 div.submit{
+	margin: 20px auto;
+	width: 200px;
+	text-align: center;
+	color: #fff;
+	background: #2DC3F2;
+	cursor: pointer;
+}

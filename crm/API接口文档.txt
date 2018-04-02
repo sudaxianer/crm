@@ -1,0 +1,55 @@
+API接口文档：
+1）获取所有的客户信息
+	URL: "/getList"(请求地址)  GET(请求方式)
+	参数：无
+	返回：'{
+			  "code": 0,           //->返回结果的标识，0代表成功 1代表失败(msg:"获取失败！")
+			  "msg": "获取成功！", //->返回结果标识的说明信息
+			  "data": [
+				{"id": 1, name": "xxx", "age": "xx", "phone": "xxxxx"}
+				  ...
+				{"id": n, name": "xxx", "age": "xx", "phone": "xxxxx"}
+			  ]        
+			}'
+			
+2）获取具体的某一个客户的信息
+	URL: "/getInfo"  GET 
+	参数：?id=xx 
+	返回：服务器端返回给客户端的id为xx的客户信息
+		'{
+			"code": 0,     
+			"msg": "成功", 		   
+			"data": {
+				"id": xx, 
+				"name": "xxx", 
+				"age": "xx", 
+				"phone": "xxxxx",
+				"address": "xxxxx"
+			}
+		}'
+		
+3）增加客户信息
+	URL: "/addInfo"  POST
+	参数：添加的客户信息(服务器端自动生成ID)
+	返回：服务器端返回给客户端的id为xx的客户信息
+		'{
+			"code": 0,      
+			"msg": "添加客户信息成功"	
+		}'
+		
+4）修改客户信息
+	URL: "/updateInfo" POST(请求方法)
+	参数：要修改的客户信息
+	返回：服务器端返回给客户端的id为xx的客户信息
+		'{
+			"code": 0,           
+			"msg": "客户信息修改成功"		   
+		}'
+				
+5）删除客户信息
+	URL: "/removeInfo"(请求地址) GET(请求方法)
+	参数：?id=xx
+	返回： '{
+			   "code": 0,           
+			   "msg": "删除客户信息成功"
+			}'
